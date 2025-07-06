@@ -1,11 +1,12 @@
-const text = Math.random().toString(32).substring(2, 20);
+require("dotenv").config();
 
-const generateRandomString = () => {
-  const time = new Date().toISOString();
-  console.log(time + ": " + text);
-  setTimeout(() => {
-    generateRandomString();
-  }, 5000);
-};
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 3000;
+const indexRouter = require("./routes/index");
 
-generateRandomString();
+app.use("/", indexRouter);
+
+app.listen(port, () => {
+  console.log(`Server started in port ${port}`);
+});

@@ -14,4 +14,7 @@ spec:
     spec:
       containers:
         - name: logoutput
-          image: krisnakris/kubersubmit
+          image: krisnakris/kubersubmit:1.7.0
+          env:
+            - name: PORT
+              value: "3011"
