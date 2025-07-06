@@ -5,7 +5,7 @@ const app = express();
 const indexRouter = require("./routes/index");
 const port = process.env.PORT || 3000;
 
-app.use("/", indexRouter);
+app.use("/pingpong", indexRouter);
 
 app.listen(port, () => {
   console.log(`Server started in port ${port}`);
