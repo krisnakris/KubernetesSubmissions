@@ -1,12 +1,23 @@
-require("dotenv").config();
+const fs = require("fs");
+const path = require("path");
+const { generateRandomString } = require("./services/stringService");
 
-const express = require("express");
-const app = express();
-const port = process.env.PORT || 3000;
-const indexRouter = require("./routes/index");
+const logDir = "/usr/src/app/files";
+const logFile = path.join(logDir, "log.txt");
 
-app.use("/", indexRouter);
+if (!fs.existsSync(logDir)) {
+  fs.mkdirSync(logDir, { recursive: true });
+}
 
-app.listen(port, () => {
-  console.log(`Server started in port ${port}`);
-});
+const writeLogToFile = () => {
+  const logEntry = generateRandomString();
+  fs.appendFile(logFile, logEntry + "\n", (err) => {
+    if (err) {
+      console.error("Error writing to log file:", err);
+    } else {
+      console.log("Log written:", logEntry);
+    }
+  });
+};
+
+setInterval(writeLogToFile, 5000);
