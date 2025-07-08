@@ -14,3 +14,4 @@
 - [1.8](https://github.com/krisnakris/KubernetesSubmissions/tree/1.8/the_project)
 - [1.9](https://github.com/krisnakris/KubernetesSubmissions/tree/1.9/the_project)
 - [1.10](https://github.com/krisnakris/KubernetesSubmissions/tree/1.10/logs)
+- [1.11](https://github.com/krisnakris/KubernetesSubmissions/tree/1.11/logs)
