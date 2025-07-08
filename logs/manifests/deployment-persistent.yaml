@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pingponglogs-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingponglogs
+  template:
+    metadata:
+      labels:
+        app: pingponglogs
+    spec:
+      volumes:
+        - name: shared-pingponglogs
+          persistentVolumeClaim:
+            claimName: pingponglogs-claim
+      containers:
+        - name: log-writer
+          image: krisnakris/kubersubmit:1.10.2
+          volumeMounts:
+            - name: shared-pingponglogs
+              mountPath: /usr/src/app/files
+          env:
+            - name: PORT
+              value: "3011"
+        - name: log-reader
+          image: krisnakris/log_reader:1.10.1
+          volumeMounts:
+            - name: shared-pingponglogs
+              mountPath: /usr/src/app/files
+          env:
+            - name: PORT
+              value: "3012"
+        - name: pingpong
+          image: krisnakris/pingpong:1.11.0
+          volumeMounts:
+            - name: shared-pingponglogs
+              mountPath: /usr/src/app/files
+          env:
+            - name: PORT
+              value: "3021"
