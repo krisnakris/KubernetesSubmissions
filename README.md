@@ -15,3 +15,4 @@
 - [1.9](https://github.com/krisnakris/KubernetesSubmissions/tree/1.9/the_project)
 - [1.10](https://github.com/krisnakris/KubernetesSubmissions/tree/1.10/logs)
 - [1.11](https://github.com/krisnakris/KubernetesSubmissions/tree/1.11/logs)
+- [1.12](https://github.com/krisnakris/KubernetesSubmissions/tree/1.12/the_project/todo-app)
