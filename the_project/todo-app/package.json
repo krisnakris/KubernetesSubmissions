@@ -6,13 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon --watch . --ext js,json,ejs index.js",
+    "dev:sync": "browser-sync start --proxy 'localhost:3000' --files 'views/**/*.ejs, public/**/*' --reload-delay 1000"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "browser-sync": "^3.0.4",
     "nodemon": "^3.1.10"
   },
   "dependencies": {
