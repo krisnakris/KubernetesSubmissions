@@ -14,7 +14,14 @@ spec:
     spec:
       containers:
         - name: todoapp
-          image: krisnakris/todoapp:1.4.1
+          image: krisnakris/todoapp:1.12.4
           env:
             - name: PORT
               value: "3001"
+          volumeMounts:
+            - name: todoapp-storage
+              mountPath: /usr/src/app/data
+      volumes:
+        - name: todoapp-storage
+          persistentVolumeClaim:
+            claimName: todoapp-claim
