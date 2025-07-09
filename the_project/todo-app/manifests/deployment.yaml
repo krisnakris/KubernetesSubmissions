@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: todoapp
-          image: krisnakris/todoapp:1.12.4
+          image: krisnakris/todoapp:1.13.0
           env:
             - name: PORT
               value: "3001"

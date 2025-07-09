@@ -12,7 +12,62 @@
       <div class="image-container">
         <img src="<%= imageUrl %>" alt="Random Image" class="main-image" />
       </div>
+      
+      <!-- Todo Form -->
+      <div class="todo-form">
+        <form action=""" method="">
+          <div class="input-group">
+            <input
+              type="text"
+              name="todoText"
+              placeholder="Add a new todo..."
+              maxlength="140"
+              required
+              class="todo-input"
+            />
+            <button type="submit" class="send-btn">Send</button>
+          </div>
+          <div class="character-count"><span id="charCount">0</span>/140</div>
+        </form>
+      </div>
+
+      <!-- Todo List -->
+      <div class="todo-list">
+        <h3>Todo Items:</h3>
+        <ul class="todos">
+          <li class="todo-item">
+            <span class="todo-text">todo 1</span>
+          </li>
+          <li class="todo-item">
+            <span class="todo-text">todo 2</span>
+          </li>
+          <li class="todo-item">
+            <span class="todo-text">todo 3</span>
+          </li>
+        </ul>
+      </div>
+
       <p><%= text %></p>
+
     </div>
+
+    <script>
+  const todoInput = document.querySelector('.todo-input');
+  const charCount = document.getElementById('charCount');
+  const form = document.querySelector('.todo-form form');
+
+  todoInput.addEventListener('input', function () {
+    charCount.textContent = todoInput.value.length;
+    if (todoInput.value.length > 120 & todoInput.value.length <= 130) {
+      charCount.style.color = 'orange';
+    }
+    else if (todoInput.value.length > 130) {
+      charCount.style.color = 'red';
+    } 
+    else {
+      charCount.style.color = '';
+    }
+  });
+</script>
   </body>
 </html>

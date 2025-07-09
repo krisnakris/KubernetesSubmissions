@@ -1,9 +1,12 @@
+require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
 const https = require("https");
 
-const IMAGE_DIR = "/usr/src/app/files";
-// const IMAGE_DIR = path.join(__dirname, "../files");
+const IMAGE_DIR =
+  process.env.NODE_ENV === "DEV"
+    ? path.join(__dirname, "../files")
+    : "/usr/src/app/files";
 const CACHE_DURATION = 10 * 60 * 1000; // 10 menit dalam milliseconds
 
 // Variable untuk melacak request setelah cache expired
