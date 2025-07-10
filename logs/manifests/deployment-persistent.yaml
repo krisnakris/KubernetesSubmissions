@@ -30,6 +30,7 @@ spec:
           volumeMounts:
             - name: shared-pingponglogs
               mountPath: /usr/src/app/files
+              readOnly: true
           env:
             - name: PORT
               value: "3012"
