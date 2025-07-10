@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pingponglogs-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingponglogs
+  template:
+    metadata:
+      labels:
+        app: pingponglogs
+    spec:
+      containers:
+        - name: log-reader
+          image: krisnakris/log_reader:2.1.2
+          env:
+            - name: PORT
+              value: "3012"
+        - name: pingpong
+          image: krisnakris/pingpong:2.1.1
+          env:
+            - name: PORT
+              value: "3021"

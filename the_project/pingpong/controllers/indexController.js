@@ -1,7 +1,11 @@
 const pingpongService = require("../services/pingpongService");
 
 exports.getPingpongCount = (req, res) => {
-  const text = pingpongService.pingpongCounter();
+  const text = pingpongService.pingpongManualCount();
+  res.send(`Ping / Pongs: ${text}`);
+};
 
-  res.send(`pong ${text}`);
+exports.currentPingpongCounter = (req, res) => {
+  const text = pingpongService.pingPongValue();
+  res.json({ count: text });
 };

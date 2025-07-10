@@ -27,6 +27,18 @@ const pingpongCounter = () => {
   return count;
 };
 
+let pingpongCount = 0;
+const pingpongManualCount = () => {
+  pingpongCount++;
+  return pingpongCount;
+};
+
+const pingPongValue = () => {
+  return pingpongCount;
+};
+
 module.exports = {
   pingpongCounter,
+  pingpongManualCount,
+  pingPongValue,
 };
