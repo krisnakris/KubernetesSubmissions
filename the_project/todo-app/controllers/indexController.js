@@ -13,9 +13,11 @@ exports.getHomePage = async (req, res) => {
   });
 };
 
-exports.addTodo = async (req, res) => {
+exports.createTodos = async (req, res) => {
   try {
-    await todoService.createTodo(req.body.todoText);
+    console.log("Request body:", req.body); // Debugging line
+    console.log("Todo text:", req.body?.todo); // Debugging line
+    await todoService.createTodo(req.body.todo);
     res.redirect("/");
   } catch (error) {
     console.error("Gagal menambahkan todo:", error);

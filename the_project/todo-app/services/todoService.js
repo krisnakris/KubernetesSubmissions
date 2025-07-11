@@ -1,4 +1,5 @@
 const axios = require("axios");
+
 const url = process.env.BACKEND_URL || "http://localhost:3001";
 const fetchTodos = async () => {
   try {

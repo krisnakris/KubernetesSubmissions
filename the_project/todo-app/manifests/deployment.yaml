@@ -14,13 +14,20 @@ spec:
     spec:
       containers:
         - name: todoapp
-          image: krisnakris/todoapp:1.13.0
+          image: krisnakris/todoapp:2.2.5
           env:
             - name: PORT
               value: "3001"
+            - name: BACKEND_URL
+              value: "http://todoapp-svc:2336"
           volumeMounts:
             - name: todoapp-storage
               mountPath: /usr/src/app/data
+        - name: todoapp-backend
+          image: krisnakris/todoapp-backend:2.2.1
+          env:
+            - name: PORT
+              value: "3002"
       volumes:
         - name: todoapp-storage
           persistentVolumeClaim:

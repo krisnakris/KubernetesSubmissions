@@ -3,6 +3,6 @@ const router = express.Router();
 const indexController = require("../controllers/indexController");
 
 router.get("/", indexController.getHomePage);
-router.post("/todos", indexController.addTodo);
+router.post("/create-todos", indexController.createTodos);
 
 module.exports = router;

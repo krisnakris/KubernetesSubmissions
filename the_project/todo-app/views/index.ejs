@@ -12,14 +12,14 @@
       <div class="image-container">
         <img src="<%= imageUrl %>" alt="Random Image" class="main-image" />
       </div>
-      
+
       <!-- Todo Form -->
       <div class="todo-form">
-        <form action="/todos"" method="POST">
+        <form action="/create-todos" method="POST">
           <div class="input-group">
             <input
               type="text"
-              name="todoText"
+              name="todo"
               placeholder="Add a new todo..."
               maxlength="140"
               required
@@ -35,35 +35,32 @@
       <div class="todo-list">
         <h3>Todo Items:</h3>
         <ul class="todos">
-         <% todos.forEach(todo => { %>
+          <% todos.forEach(todo => { %>
           <li class="todo-item">
             <span class="todo-text"><%= todo %></span>
           </li>
-        <% }); %>
+          <% }); %>
         </ul>
       </div>
 
       <p><%= text %></p>
-
     </div>
 
     <script>
-  const todoInput = document.querySelector('.todo-input');
-  const charCount = document.getElementById('charCount');
-  const form = document.querySelector('.todo-form form');
+      const todoInput = document.querySelector(".todo-input");
+      const charCount = document.getElementById("charCount");
+      const form = document.querySelector(".todo-form form");
 
-  todoInput.addEventListener('input', function () {
-    charCount.textContent = todoInput.value.length;
-    if (todoInput.value.length > 120 & todoInput.value.length <= 130) {
-      charCount.style.color = 'orange';
-    }
-    else if (todoInput.value.length > 130) {
-      charCount.style.color = 'red';
-    } 
-    else {
-      charCount.style.color = '';
-    }
-  });
-</script>
+      todoInput.addEventListener("input", function () {
+        charCount.textContent = todoInput.value.length;
+        if ((todoInput.value.length > 120) & (todoInput.value.length <= 130)) {
+          charCount.style.color = "orange";
+        } else if (todoInput.value.length > 130) {
+          charCount.style.color = "red";
+        } else {
+          charCount.style.color = "";
+        }
+      });
+    </script>
   </body>
 </html>
