@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -15,7 +15,8 @@ if (process.env.NODE_ENV === "DEV") {
 } else {
   app.use("/images", express.static("/usr/src/app/files"));
 }
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 const indexRouter = require("./routes/index");
 
 app.use("/", indexRouter);

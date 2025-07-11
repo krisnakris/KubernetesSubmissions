@@ -15,7 +15,7 @@
       
       <!-- Todo Form -->
       <div class="todo-form">
-        <form action=""" method="">
+        <form action="/todos"" method="POST">
           <div class="input-group">
             <input
               type="text"
@@ -35,15 +35,11 @@
       <div class="todo-list">
         <h3>Todo Items:</h3>
         <ul class="todos">
+         <% todos.forEach(todo => { %>
           <li class="todo-item">
-            <span class="todo-text">todo 1</span>
+            <span class="todo-text"><%= todo %></span>
           </li>
-          <li class="todo-item">
-            <span class="todo-text">todo 2</span>
-          </li>
-          <li class="todo-item">
-            <span class="todo-text">todo 3</span>
-          </li>
+        <% }); %>
         </ul>
       </div>
 
