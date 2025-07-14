@@ -18,9 +18,15 @@ spec:
           image: krisnakris/todoapp:2.2.5
           env:
             - name: PORT
-              value: "3001"
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: FRONTEND_PORT
             - name: BACKEND_URL
-              value: "http://todoapp-svc:2336"
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: BACKEND_URL
           volumeMounts:
             - name: todoapp-storage
               mountPath: /usr/src/app/data
@@ -28,7 +34,10 @@ spec:
           image: krisnakris/todoapp-backend:2.2.1
           env:
             - name: PORT
-              value: "3002"
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: BACKEND_PORT
       volumes:
         - name: todoapp-storage
           persistentVolumeClaim:
