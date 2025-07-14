@@ -25,3 +25,4 @@
 - [2.3](https://github.com/krisnakris/KubernetesSubmissions/tree/2.3/logs)
 - [2.4](https://github.com/krisnakris/KubernetesSubmissions/tree/2.4/the_project)
 - [2.5](https://github.com/krisnakris/KubernetesSubmissions/tree/2.5/logs)
+- [2.6](https://github.com/krisnakris/KubernetesSubmissions/tree/2.6/the_project/todo-app/manifests)
