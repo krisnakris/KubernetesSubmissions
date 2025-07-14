@@ -3,7 +3,7 @@ const stringService = require("../services/stringService");
 const pingpongService = require("../services/pingpongRequest");
 
 exports.getLogFile = (req, res) => {
-  const logContent = logs.readLogFile();
+  const logContent = logs.readFile("logFile");
 
   res.send(`<pre>${logContent}</pre>`);
 };
@@ -19,7 +19,12 @@ exports.getPingPong = async (req, res) => {
       });
     }
 
-    res.send(`${currentTime} \nPing / Pongs: ${currentPingpong.data}`);
+    res.send(`<pre>
+file content: ${logs.readFile("configFile").trim()}
+env variable: MESSAGE=${process.env.MESSAGE}
+${currentTime}
+Ping / Pongs: ${currentPingpong.data}
+</pre>`);
   } catch (error) {
     console.error("Error in getPingPong:", error);
     res.status(500).json({

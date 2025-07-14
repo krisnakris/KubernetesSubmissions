@@ -13,14 +13,32 @@ spec:
       labels:
         app: pingponglogs
     spec:
+      volumes:
+        - name: information-volume
+          configMap:
+            name: information-config
       containers:
         - name: log-reader
-          image: krisnakris/log_reader:2.1.2
+          image: krisnakris/log_reader:2.5.3
           env:
             - name: PORT
-              value: "3012"
+              valueFrom:
+                configMapKeyRef:
+                  name: information-config
+                  key: PORT
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: information-config
+                  key: message
+          volumeMounts:
+            - name: information-volume
+              mountPath: /app/config
         - name: pingpong
-          image: krisnakris/pingpong:2.1.1
+          image: krisnakris/pingpong:2.5.1
           env:
             - name: PORT
-              value: "3021"
+              valueFrom:
+                configMapKeyRef:
+                  name: information-config
+                  key: PINGPONG_PORT

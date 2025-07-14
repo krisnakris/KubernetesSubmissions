@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: information-config
+  namespace: exercises
+data:
+  information.txt: |
+    this text is from file
+  message: "Hello world"
+  PORT: "3012"
+  PINGPONG_PORT: "3021"
