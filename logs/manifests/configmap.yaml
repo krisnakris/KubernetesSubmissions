@@ -9,3 +9,5 @@ data:
   message: "Hello world"
   PORT: "3012"
   PINGPONG_PORT: "3021"
+  PGHOST: "postgres-svc"
+  PGPORT: "5432"

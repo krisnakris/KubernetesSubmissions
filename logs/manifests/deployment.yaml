@@ -35,10 +35,35 @@ spec:
             - name: information-volume
               mountPath: /app/config
         - name: pingpong
-          image: krisnakris/pingpong:2.5.1
+          image: krisnakris/pingpong:2.7.2
           env:
             - name: PORT
               valueFrom:
                 configMapKeyRef:
                   name: information-config
                   key: PINGPONG_PORT
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-key
+                  key: PGUSER
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-key
+                  key: PGPASSWORD
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-key
+                  key: PGDATABASE
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: information-config
+                  key: PGHOST
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: information-config
+                  key: PGPORT
