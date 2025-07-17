@@ -1,18 +1,23 @@
 const todosService = require("../services/todosService");
 
-exports.getTodos = (req, res) => {
-  const todos = todosService.getTodos();
-  res.json({ todos });
+exports.getTodo = async (req, res) => {
+  try {
+    const todos = await todosService.getTodos();
+    res.json({ todos });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to fetch todos" });
+  }
 };
 
-exports.createTodos = (req, res) => {
+exports.createTodo = async (req, res) => {
   if (!req.body.todo) {
     return res.status(400).json({ error: "Todo is required" });
   }
 
   try {
-    todosService.createTodos(req.body.todo);
-    res.json({ status: "created" });
+    const newTodo = await todosService.createTodo(req.body.todo);
+    res.json(newTodo);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to create todo" });

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: todoapp
-          image: krisnakris/todoapp:2.2.5
+          image: krisnakris/todoapp:2.8.0
           env:
             - name: PORT
               valueFrom:
@@ -31,7 +31,7 @@ spec:
             - name: todoapp-storage
               mountPath: /usr/src/app/data
         - name: todoapp-backend
-          image: krisnakris/todoapp-backend:2.2.1
+          image: krisnakris/todoapp-backend:2.8.0
           env:
             - name: PORT
               valueFrom:
