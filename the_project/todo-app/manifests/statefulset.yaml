@@ -22,8 +22,13 @@ spec:
               name: postgres-port
           volumeMounts:
             - name: postgres-data-storage
-              mountPath: /data
+              mountPath: /var/lib/postgresql/data
           env:
+            - name: PGDATA
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: PGDATA
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:

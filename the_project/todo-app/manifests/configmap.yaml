@@ -9,3 +9,4 @@ data:
   BACKEND_PORT: "3002"
   PGHOST: "postgres-svc"
   PGPORT: "5432"
+  PGDATA: "/var/lib/postgresql/data"
