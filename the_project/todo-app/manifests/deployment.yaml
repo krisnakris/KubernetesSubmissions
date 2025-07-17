@@ -38,6 +38,31 @@ spec:
                 configMapKeyRef:
                   name: todoapp-config
                   key: BACKEND_PORT
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-key
+                  key: PGUSER
+            - name: PGDATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-key
+                  key: PGDATABASE
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-key
+                  key: PGPASSWORD
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: PGHOST
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: todoapp-config
+                  key: PGPORT
       volumes:
         - name: todoapp-storage
           persistentVolumeClaim:
