@@ -31,7 +31,7 @@ spec:
             - name: todoapp-storage
               mountPath: /usr/src/app/data
         - name: todoapp-backend
-          image: krisnakris/todoapp-backend:2.8.0
+          image: krisnakris/todoapp-backend:2.10.0
           env:
             - name: PORT
               valueFrom:
