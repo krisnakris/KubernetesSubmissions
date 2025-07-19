@@ -6,7 +6,6 @@ const getTodos = async () => {
 };
 
 const createTodo = async (todoText) => {
-  console.log("🚀 ~ createTodo ~ todoText:", todoText);
   const result = await db.query(
     "INSERT INTO todos(todo) VALUES($1) RETURNING *",
     [todoText]

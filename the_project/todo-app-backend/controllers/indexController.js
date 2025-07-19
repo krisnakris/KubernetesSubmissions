@@ -15,6 +15,15 @@ exports.createTodo = async (req, res) => {
     return res.status(400).json({ error: "Todo is required" });
   }
 
+  if (req.body.todo.length > 140) {
+    console.log(`Todo request too long: `, req.body.todo);
+
+    return res
+      .status(400)
+      .json({ error: "Todo must be 140 characters or less" });
+  }
+  console.log(`TODO: `, req.body.todo);
+
   try {
     const newTodo = await todosService.createTodo(req.body.todo);
     res.json(newTodo);
