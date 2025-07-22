@@ -19,7 +19,7 @@ spec:
             name: information-config
       containers:
         - name: log-reader
-          image: krisnakris/log_reader:2.5.3
+          image: krisnakris/log_reader:2.5.4
           env:
             - name: PORT
               valueFrom:
@@ -35,7 +35,7 @@ spec:
             - name: information-volume
               mountPath: /app/config
         - name: pingpong
-          image: krisnakris/pingpong:2.7.2
+          image: krisnakris/pingpong:2.7.3
           env:
             - name: PORT
               valueFrom:

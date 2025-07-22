@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pingpong
+  namespace: exercises
 spec:
   replicas: 1
   selector:
@@ -14,7 +15,7 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: krisnakris/pingpong:1.9.4
+          image: krisnakris/pingpong:2.7.3
           env:
             - name: PORT
               value: "3021"
