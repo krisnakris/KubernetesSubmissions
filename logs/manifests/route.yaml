@@ -10,14 +10,20 @@ spec:
     - matches:
         - path:
             type: PathPrefix
+            value: /pingpong
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /
+      backendRefs:
+        - name: pingponglogs-svc
+          port: 2355
+    - matches:
+        - path:
+            type: PathPrefix
             value: /
       backendRefs:
         - name: pingponglogs-svc
           port: 2345
-    - matches:
-        - path:
-            type: PathPrefix
-            value: /pingpong
-      backendRefs:
-        - name: pingponglogs-svc
-          port: 2355
