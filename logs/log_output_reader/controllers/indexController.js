@@ -14,21 +14,29 @@ exports.getPingPong = async (req, res) => {
     const currentPingpong = await pingpongService.getPingPongData();
 
     if (currentPingpong.status !== 200) {
-      return res.status(currentPingpong.status).json({
-        error: `Error getting pingpong count: ${currentPingpong.data}`,
-      });
+      res.status(200).send(`<pre>
+        file content: ${logs.readFile("configFile").trim()}
+        env variable: MESSAGE=${process.env.MESSAGE}
+        ${currentTime}
+        ERROR: Error getting pingpong count - ${currentPingpong.data}
+        Status: ${currentPingpong.status}
+        </pre>`);
+      return;
     }
 
     res.send(`<pre>
-file content: ${logs.readFile("configFile").trim()}
-env variable: MESSAGE=${process.env.MESSAGE}
-${currentTime}
-Ping / Pongs: ${currentPingpong.data}
-</pre>`);
+      file content: ${logs.readFile("configFile").trim()}
+      env variable: MESSAGE=${process.env.MESSAGE}
+      ${currentTime}
+      Ping / Pongs: ${currentPingpong.data}
+      </pre>`);
   } catch (error) {
     console.error("Error in getPingPong:", error);
-    res.status(500).json({
-      error: "Internal server error",
-    });
+    res.status(200).send(`<pre>
+      file content: ${logs.readFile("configFile").trim()}
+      env variable: MESSAGE=${process.env.MESSAGE}
+      ${stringService.generateRandomString()}
+      ERROR: Internal server error - ${error.message}
+      </pre>`);
   }
 };

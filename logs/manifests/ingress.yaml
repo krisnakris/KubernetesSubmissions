@@ -11,13 +11,13 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: pingponglogs-svc
+                name: pingponglogs2-svc
                 port:
                   name: log-reader
           - path: /pingpong
             pathType: Prefix
             backend:
               service:
-                name: pingponglogs-svc
+                name: pingponglogs2-svc
                 port:
                   name: pingpong
