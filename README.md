@@ -35,3 +35,4 @@
 
 - [3.1](https://github.com/krisnakris/KubernetesSubmissions/tree/3.1/logs/manifests)
 - [3.2](https://github.com/krisnakris/KubernetesSubmissions/tree/3.2/logs/manifests)
+- [3.3](https://github.com/krisnakris/KubernetesSubmissions/tree/3.3/logs/manifests)
