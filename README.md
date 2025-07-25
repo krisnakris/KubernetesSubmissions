@@ -37,3 +37,4 @@
 - [3.2](https://github.com/krisnakris/KubernetesSubmissions/tree/3.2/logs/manifests)
 - [3.3](https://github.com/krisnakris/KubernetesSubmissions/tree/3.3/logs/manifests)
 - [3.4](https://github.com/krisnakris/KubernetesSubmissions/tree/3.4/logs/manifests)
+- [3.5](https://github.com/krisnakris/KubernetesSubmissions/tree/3.5/the_project/todo-app/manifests)
