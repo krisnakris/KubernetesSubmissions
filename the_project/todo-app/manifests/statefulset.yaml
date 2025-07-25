@@ -23,6 +23,8 @@ spec:
           volumeMounts:
             - name: postgres-data-storage
               mountPath: /var/lib/postgresql/data
+              subPath: postgres
+
           env:
             - name: PGDATA
               valueFrom:
@@ -60,7 +62,6 @@ spec:
         namespace: project
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
         resources:
           requests:
             storage: 100Mi
