@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  # - the_project/todo-app/manifests/secret.yaml
+  - the_project/todo-app/manifests/configmap.yaml
+  - the_project/todo-app/manifests/statefulset.yaml
+  - the_project/todo-app/manifests/persistentvolumeclaim.yaml
+  - the_project/todo-app/manifests/deployment.yaml
+  - the_project/todo-app/manifests/load-balancer-service.yaml
+  - the_project/todo-app/manifests/service.yaml
+  - the_project/todo-app/manifests/cronjob.yaml
+images:
+  - name: todoapp-kustomization
+    newName: krisnakris/todoapp
+    newTag: 3.5.0
+  - name: todoapp-backend-kustomization
+    newName: krisnakris/todoapp-backend
+    newTag: 3.5.0
