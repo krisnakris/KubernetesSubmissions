@@ -43,6 +43,16 @@ jobs:
           project_id: "${{ env.PROJECT_ID }}"
           location: "${{ env.GKE_ZONE }}"
 
+      - name: Create namespace and secrets
+        run: |-
+          kubectl create namespace project --dry-run=client -o yaml | kubectl apply -f -
+          kubectl create secret generic postgres-key \
+            --namespace=project \
+            --from-literal=PGUSER="${{ secrets.POSTGRES_USER }}" \
+            --from-literal=PGDATABASE="${{ secrets.POSTGRES_DATABASE }}" \
+            --from-literal=PGPASSWORD="${{ secrets.POSTGRES_PASSWORD }}" \
+            --dry-run=client -o yaml | kubectl apply -f -
+
       - name: "Form image names"
         run: |-
           echo "FRONTEND_TAG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$FRONTEND_IMAGE:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
@@ -58,29 +68,24 @@ jobs:
           cd the_project/todo-app-backend
           docker build --tag $BACKEND_TAG .
 
-      - name: Publish
+      - name: Publish to GAR
         run: |-
           docker push $FRONTEND_TAG
           docker push $BACKEND_TAG
 
-      - name: Set up Kustomize
-        uses: imranismail/setup-kustomize@v2.1.0
-
-      - name: Create Kubernetes secrets
-        run: |-
-          kubectl create namespace project --dry-run=client -o yaml | kubectl apply -f -
-          kubectl create secret generic postgres-key \
-            --namespace=project \
-            --from-literal=PGUSER="${{ secrets.POSTGRES_USER }}" \
-            --from-literal=PGDATABASE="${{ secrets.POSTGRES_DATABASE }}" \
-            --from-literal=PGPASSWORD="${{ secrets.POSTGRES_PASSWORD }}" \
-            --dry-run=client -o yaml | kubectl apply -f -
-
       - name: Deploy
         run: |-
           cd the_project/todo-app/manifests
+
+          # Update kustomization to use GAR images
           kustomize edit set image todoapp-kustomization=$FRONTEND_TAG
           kustomize edit set image todoapp-backend-kustomization=$BACKEND_TAG
+
+          # Verify kustomization
+          echo "Updated kustomization.yaml:"
+          cat kustomization.yaml
+
+          # Build and apply
           kustomize build . | kubectl apply -f -
 
       - name: Wait for deployment and check status
