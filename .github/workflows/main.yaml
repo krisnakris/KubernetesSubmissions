@@ -2,6 +2,7 @@ name: Release application
 
 on:
   push:
+  delete:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
@@ -18,6 +19,7 @@ jobs:
   build-publish-deploy:
     name: Build, Publish and Deploy
     runs-on: ubuntu-latest
+    if: github.event_name == 'push'
 
     steps:
       - name: Checkout
@@ -112,3 +114,50 @@ jobs:
           kubectl get services -o wide -n $NAMESPACE
           kubectl get pods -n $NAMESPACE
           kubectl get deployments -n $NAMESPACE
+
+  cleanup-environment:
+    name: Cleanup Environment
+    runs-on: ubuntu-latest
+    if: github.event_name == 'delete' && github.event.ref_type == 'branch'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: "${{ secrets.GKE_SA_KEY }}"
+
+      - name: "Set up Cloud SDK"
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: "Get GKE credentials"
+        uses: "google-github-actions/get-gke-credentials@v2"
+        with:
+          cluster_name: "${{ env.GKE_CLUSTER }}"
+          project_id: "${{ env.PROJECT_ID }}"
+          location: "${{ env.GKE_ZONE }}"
+
+      - name: Delete namespace
+        run: |-
+          # Get the deleted branch name
+          DELETED_BRANCH="${{ github.event.ref }}"
+
+          # Skip cleanup for main branch (uses 'project' namespace which should be persistent)
+          if [ "$DELETED_BRANCH" = "main" ]; then
+            echo "Skipping cleanup for main branch"
+            exit 0
+          fi
+
+          # Delete the namespace corresponding to the deleted branch
+          NAMESPACE="$DELETED_BRANCH"
+
+          echo "Deleting namespace: $NAMESPACE"
+
+          # Check if namespace exists before trying to delete
+          if kubectl get namespace "$NAMESPACE" >/dev/null 2>&1; then
+            kubectl delete namespace "$NAMESPACE"
+            echo "Namespace $NAMESPACE deleted successfully"
+          else
+            echo "Namespace $NAMESPACE not found, nothing to delete"
+          fi
