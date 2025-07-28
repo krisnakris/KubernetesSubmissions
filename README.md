@@ -40,3 +40,4 @@
 - [3.5](https://github.com/krisnakris/KubernetesSubmissions/tree/3.5/the_project/todo-app/manifests)
 - [3.6](https://github.com/krisnakris/KubernetesSubmissions/tree/3.6/.github/workflows)
 - [3.7](https://github.com/krisnakris/KubernetesSubmissions/tree/3.7/.github/workflows)
+- [3.8](https://github.com/krisnakris/KubernetesSubmissions/tree/3.8/.github/workflows)
